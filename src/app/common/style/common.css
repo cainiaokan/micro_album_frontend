@@ -1,0 +1,60 @@
+html {
+  font: 100px/1 'Trebuchet MS', Tahoma, Arial, 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  outline: none;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+
+  box-sizing: inherit;
+
+  vertical-align: bottom;
+}
+
+input[type='text'] {
+  font-size: inherit;
+  font-weight: 600;
+
+  height: 30px;
+  padding: 0 0 0 7px;
+
+  cursor: auto;
+  vertical-align: bottom;
+
+  color: #bdbdbd;
+  border: 1px solid #e0e0e0;
+  border-radius: 0;
+  background: #fff;
+
+  -webkit-appearance: none;
+          appearance: none;
+}
+
+a {
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+
+  color: inherit;
+
+  -webkit-touch-callout: none;
+}
+
+#album-root-container {
+  font-size: .12rem;
+
+  position: relative;
+
+  max-width: 540px;
+  margin: 0 auto;
+}

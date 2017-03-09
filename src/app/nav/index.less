@@ -1,0 +1,121 @@
+.album-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  left: 50%;
+
+  width: 100%;
+  max-width: 540px;
+  height: .48rem;
+
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+
+  border-top: 1px solid #e0e0e0;
+  background-color: #fff;
+  li {
+    display: inline-block;
+
+    width: 20%;
+    padding-bottom: .03rem;
+
+    text-align: center;
+    vertical-align: top;
+    &:before {
+      display: block;
+
+      width: .25rem;
+      height: .25rem;
+      margin: .04rem auto .04rem;
+
+      content: '\0020';
+
+      background-size: cover;
+    }
+  }
+  .to-home {
+    &:before {
+      background-image: url(./img/home-gray.png);
+    }
+    &.active:before {
+      background-image: url(./img/home-red.png);
+    }
+  }
+  .to-gallery {
+    &:before {
+      background-image: url(./img/albums-gray.png);
+    }
+    &.active:before {
+      background-image: url(./img/albums-red.png);
+    }
+  }
+  .to-upload {
+    &:before {
+      width: .35rem;
+      height: .35rem;
+      margin: .06rem auto .04rem;
+
+      background-image: url(./img/add.png);
+    }
+  }
+  .to-my-photos {
+    &:before {
+      background-image: url(./img/photo-gray.png);
+    }
+    &.active:before {
+      background-image: url(./img/photo-red.png);
+    }
+  }
+  .to-user-center {
+    &:before {
+      background-image: url(./img/user-gray.png);
+    }
+    &.active:before {
+      background-image: url(./img/user-red.png);
+    }
+  }
+  .upload-guide {
+    position: absolute;
+    top: -.4rem;
+    left: 50%;
+
+    padding: .08rem .3rem;
+
+    transition: visibility 0s linear 2s;
+    transform: translate(-50%, 0);
+    pointer-events: none;
+
+    color: #e4474e;
+    border: 1px solid #e4474e;
+    border-radius: .15rem;
+    background-color: #fff;
+    &:before {
+      position: absolute;
+      bottom: -.2rem;
+      left: 50%;
+
+      margin-left: -.1rem;
+
+      content: '\0020';
+
+      border: .1rem solid transparent;
+      border-top-color: #e4474e;
+    }
+    &:after {
+      position: absolute;
+      bottom: -.19rem;
+      left: 50%;
+
+      margin-top: -2px;
+      margin-left: -.1rem;
+
+      content: '\0020';
+
+      border: .1rem solid transparent;
+      border-top-color: #fff;
+    }
+    &.auto-hide {
+      visibility: hidden;
+    }
+  }
+}

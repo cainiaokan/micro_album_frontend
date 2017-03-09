@@ -1,0 +1,126 @@
+.album-home {
+  padding-bottom: .48rem;
+  .album-banner {
+    height: 100px;
+    padding-top: 14px;
+
+    border-bottom: 1px solid #e0e0e0;
+    background: url(./img/banner.jpg) no-repeat;
+    background-position: 50%;
+    background-size: 540px 100px;
+    p {
+      line-height: .26rem;
+
+      width: 15em;
+      height: .26rem;
+      margin: 0 auto;
+
+      color: #fff;
+    }
+    b {
+      font-size: .26rem;
+
+      vertical-align: bottom;
+    }
+  }
+  .no-album {
+    padding-top: .5rem;
+
+    text-align: center;
+    p {
+      line-height: 2;
+    }
+    .btn {
+      margin: .5rem 0;
+    }
+    .help {
+      margin-top: .16rem;
+    }
+  }
+  .create-album {
+    line-height: .25rem;
+
+    padding: .12rem 0;
+
+    text-align: center;
+    .btn {
+      line-height: .25rem;
+
+      height: .25rem;
+      margin-left: .1rem;
+    }
+  }
+  .news-card {
+    .title {
+      line-height: .14rem;
+
+      height: .4rem;
+      padding: .13rem 0;
+      b {
+        margin: 0 .08rem 0;
+        padding: .03rem .1rem;
+
+        color: #606060;
+        border-radius: .1rem;
+        background-color: #e0e0e0;
+      }
+    }
+    .photo {
+      display: inline-block;
+
+      width: calc(~'33.3% - 3.3px');
+      margin: 0 .05rem .05rem 0;
+      padding: calc(~'16.6% - 1.6px');
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+    }
+  }
+  .empty-album {
+    margin: .2rem .075rem;
+
+    border: 1px solid #e0e0e0;
+    border-radius: .05rem;
+    .head-pic {
+      display: inline-block;
+      float: left;
+
+      width: 1rem;
+      height: 1rem;
+      margin: .1rem 0 .1rem .1rem;
+
+      border-radius: 100%;
+      background-size: cover;
+    }
+    .album-info {
+      line-height: 1.6;
+
+      display: inline-block;
+      float: right;
+
+      width: calc(~'100% - 1.3rem');
+      margin: .1rem .1rem .1rem 0;
+
+      vertical-align: top;
+    }
+    h2 {
+      font-size: .15rem;
+
+      color: #606060;
+    }
+    p {
+      overflow: hidden;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      color: #d0d0d0;
+    }
+    .btn {
+      line-height: .35rem;
+
+      height: .35rem;
+      margin-top: .22rem;
+    }
+  }
+}
