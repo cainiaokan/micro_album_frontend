@@ -2,6 +2,7 @@ import { getNews } from '../http'
 
 export const REQUEST_NEWS = 'REQUEST_NEWS'
 export const RECEIVE_NEWS = 'RECEIVE_NEWS'
+export const TOGGLE_GALLERY = 'TOGGLE_GALLERY'
 
 function requestNews () {
   return {
@@ -24,5 +25,16 @@ export function fetchNews (pageNum) {
     dispatch(requestNews())
     return getNews(pageNum)
       .then(json => dispatch(receiveNews(json.data)))
+  }
+}
+
+export function toggleGallery (showGallery, groupIndex, photoIndex) {
+  return dispatch => {
+    dispatch({
+      type: TOGGLE_GALLERY,
+      showGallery,
+      groupIndex,
+      photoIndex,
+    })
   }
 }

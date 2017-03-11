@@ -3,24 +3,65 @@ import '../common/style/btn.less'
 
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchNews } from './actions'
-import Nav from '../nav/nav'
+import { fetchNews, toggleGallery } from './actions'
 import { TO_HOME } from '../routerConfig'
+import Nav from '../nav/nav'
+import Gallery from '../gallery/gallery'
 
 class Home extends React.Component {
 
   constructor(props) {
     super(props)
+    this.onScrollHandler = this.onScrollHandler.bind(this)
+    this.onGalleryShow = this.onGalleryShow.bind(this)
+    this.onGalleryClose = this.onGalleryClose.bind(this)
+    this.getPhotoByIndex = this.getPhotoByIndex.bind(this)
   }
 
   componentDidMount () {
     const { dispatch, pageNum } = this.props
     dispatch(fetchNews(pageNum))
+    document.addEventListener('scroll', this.onScrollHandler)
+  }
+
+  componentWillUnmount () {
+    document.removeEventListener('scroll', this.onScrollHandler)
+  }
+
+  onScrollHandler () {
+    const { dispatch, pageNum, isFetching, hasMore } = this.props
+    if (!isFetching &&
+        hasMore &&
+        document.body.scrollTop + document.documentElement.clientHeight + 64 >= document.documentElement.offsetHeight) {
+      dispatch(fetchNews(pageNum))
+    }
+  }
+
+  onGalleryShow (ev) {
+    const { dispatch } = this.props
+    const { groupIndex, photoIndex } = ev.target.dataset 
+    dispatch(toggleGallery(true, +groupIndex, +photoIndex))
+  }
+
+  onGalleryClose () {
+    const { dispatch } = this.props
+    dispatch(toggleGallery(false))
+  }
+
+  getPhotoByIndex (index) {
+    const { items, groupIndex } = this.props
+    const url = items[groupIndex].info.mediaList[index].photoUrl
+    return {
+      thumbnail: `${url}!w132h132`,
+      url,
+    }
   }
 
   render () {
     const {
-      hasEmptyAlbum, isFetching, items
+      hasEmptyAlbum, isLoaded,
+      isFetching, items, hasMore,
+      showGallery, groupIndex, photoIndex,
     } = this.props
 
     return <div className='album-home'>
@@ -29,7 +70,7 @@ class Home extends React.Component {
         <p>和家人朋友一起共享照片</p>
       </div>
       {
-        !isFetching && !items.length ?
+        isLoaded && !items.length ?
         <div className='no-album'>
           <p>创建一个只有自己的私人相册</p>
           <p>也可以邀请亲朋好友一起共享照片</p>
@@ -41,33 +82,36 @@ class Home extends React.Component {
         </div> : null
       }
       {
-        !isFetching && !hasEmptyAlbum ?
+        isLoaded && !hasEmptyAlbum ?
         <div className='create-album'>
           不同的聚会、旅行......共享不同的照片
           <a href='/quan/new/' className='btn btn-red btn-rounded'>创建相册</a>
         </div> : null
       }
       {
-        items.map((item, index) =>
+        items.map((item, groupIndex) =>
           item.type === 'newsInfo' ?
-          <div key={index} className='news-card'>
+          <div key={groupIndex} className='news-card'>
             <div className='title'>
               <b>{item.info.groupName}</b>
               <i>{item.info.userName}，{item.info.updateTime}</i>
             </div>
             <div className='photo-list'>
               {
-                item.info.mediaList.map(media =>
+                item.info.mediaList.map((media, photoIndex) =>
                   <div
-                    key={media.photoId}
+                    key={photoIndex}
                     className='photo'
-                    style={ {backgroundImage: `url(${media.photoUrl}!w132h132)`} }>
+                    style={ {backgroundImage: `url(${media.photoUrl}!w132h132)`} }
+                    data-group-index={groupIndex}
+                    data-photo-index={photoIndex}
+                    onClick={this.onGalleryShow}>
                   </div>
                 )
               }
             </div>
           </div> :
-          <div key={index} className='empty-album clearfix'>
+          <div key={groupIndex} className='empty-album clearfix'>
             <div
               className='head-pic'
               style={ {backgroundImage: `url(${item.info.headImgUrl})`} }></div>
@@ -79,40 +123,43 @@ class Home extends React.Component {
           </div>
         )
       }
+      {
+        isFetching || !hasMore ?
+        <div className={`loading ${hasMore ? '' : 'no-more-record'}`}>
+          {
+            !hasMore ? '已加载全部' : ''
+          }
+        </div> : null
+      }
       <Nav pageId={TO_HOME.id} notEmpty={!!items.length} />
+      {
+        showGallery ?
+        <Gallery
+          initialIndex={photoIndex}
+          totalCount={items[groupIndex].info.mediaList.length}
+          getPhotoByIndex={this.getPhotoByIndex}
+          onClose={this.onGalleryClose} /> : null
+      }
     </div>
   }
 }
 
 Home.propTypes = {
+  isLoaded: PropTypes.bool.isRequired,
   hasEmptyAlbum: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   hasMore: PropTypes.bool.isRequired,
   pageNum: PropTypes.number.isRequired,
   message: PropTypes.object,
+  showGallery: PropTypes.bool.isRequired,
+  groupIndex: PropTypes.number,
+  photoIndex: PropTypes.number,
   dispatch: PropTypes.func.isRequired,
 }
 
-function mapStateToProp(state = {
-  hasEmptyAlbum: false,
-  isFetching: false,
-  items: [],
-  hasMore: true,
-  pageNum: 1,
-  message: null,
-}) {
-  const { news } = state
-  const {
-    hasEmptyAlbum, isFetching, items,
-    hasMore, message, pageNum,
-  } = news
-
-  return {
-    hasEmptyAlbum, isFetching, items,
-    hasMore, message, pageNum
-  }
+function mapStateToProp(state) {
+  return state.news
 }
 
 export default connect(mapStateToProp)(Home)
-

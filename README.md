@@ -97,6 +97,11 @@
         <td>无</td>
         <td>有，可以开启http强缓存</td>
       </tr>
+      <tr>
+        <th>API Domain</th>
+        <td>weixin.imliren.com</td>
+        <td>m.weiqunxiangce.com</td>
+      </tr>
     </tbody>
 </table>
 
