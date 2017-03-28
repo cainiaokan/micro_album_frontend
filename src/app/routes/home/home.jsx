@@ -1,14 +1,14 @@
 import './index.less'
-import '../res/style/btn.less'
+import '../../res/style/btn.less'
 
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchNews } from './actions'
-import { showGallery } from '../components/gallery/actions'
-import { TO_HOME } from '../routerConfig'
-import Nav from '../components/nav/nav'
-import Gallery from '../components/gallery/gallery'
-import GalleryOverlay from '../components/overlay/GalleryOverlay'
+import { showGallery } from '../../components/gallery/actions'
+import { TO_HOME } from '../../routerConfig'
+import Nav from '../../components/nav/nav'
+import Gallery from '../../components/gallery/gallery'
+import GalleryOverlay from '../../components/overlay/GalleryOverlay'
 
 class Home extends React.Component {
 

@@ -1,31 +1,34 @@
-var path = require('path')
-var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var webpackMerge = require('webpack-merge')
+const path = require('path')
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const webpackMerge = require('webpack-merge')
 
-const commonConfig = require('./base.js')
+const baseConfig = require('./base')
 
-module.exports = webpackMerge(commonConfig, {
+module.exports = webpackMerge(baseConfig, {
   watch: true,
   output: {
     path: path.join(__dirname, '../dist/sv'),
-    filename: '[name].js',
-    chunkFilename: '[name].js',
-    sourceMapFilename: '[name].map',
+    filename: 'static/js/[name].js',
+    chunkFilename: 'static/js/[name].js',
+    sourceMapFilename: 'static/js/[name].map',
     publicPath: 'http://weixin.imliren.com/sv/'
   },
   module: {
     rules: [
       {
         test: /\.css$/,
+        include: path.resolve(__dirname, '../src/res'),
         use: ExtractTextPlugin.extract(['css-loader'])
       },
       {
         test: /\.less$/,
+        include: path.resolve(__dirname, '../src/res'),
         use: ExtractTextPlugin.extract(['css-loader', 'less-loader'])
       },
       {
         test: /\.(jpe?g|png|gif)$/i,
+        include: path.resolve(__dirname, '../src'),
         use: [
           {
             loader: 'image-webpack-loader',
@@ -49,6 +52,7 @@ module.exports = webpackMerge(commonConfig, {
       },
       {
         test: /\.(woff|woff2|eot|ttf|svg)$/i,
+        include: path.resolve(__dirname, '../src'),
         use: {
           loader: 'url-loader',
           options: {

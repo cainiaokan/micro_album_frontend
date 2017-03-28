@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router'
 export const TO_HOME = {
   id: 'to-home',
   name: '首页',
-  path: '/',
+  path: '/sv/home',
 }
 export const TO_ALBUMS = {
   id: 'to-gallery',
@@ -14,17 +14,17 @@ export const TO_ALBUMS = {
 export const TO_UPLOAD = {
   id: 'to-upload',
   name: '',
-  path: '/upload'
+  path: '/sv/upload'
 }
 export const TO_MY_PHOTOS = {
   id: 'to-my-photos',
   name: '我的照片',
-  path: '/my_photos',
+  path: '/sv/my_photos',
 }
 export const TO_USER_CENTER = {
   id: 'to-user-center',
   name: '个人中心',
-  path: 'user_center',
+  path: 'sv/user_center',
 }
 
 export function goToPage(pageId) {

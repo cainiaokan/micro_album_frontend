@@ -1,12 +1,12 @@
 import './index.less'
-import '../res/style/btn.less'
+import '../../res/style/btn.less'
 
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { } from './actions'
-import {  } from '../components/gallery/actions'
-import { TO_ALBUMS } from '../routerConfig'
-import Nav from '../components/nav/nav'
+import {  } from '../../components/gallery/actions'
+import { TO_ALBUMS } from '../../routerConfig'
+import Nav from '../../components/nav/nav'
 
 class AlbumList extends React.Component {
 

@@ -1,32 +1,35 @@
-var path = require('path')
-var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-var webpackMerge = require('webpack-merge')
+const webpackMerge = require('webpack-merge')
 
-const commonConfig = require('./base.js')
+const baseConfig = require('./base')
 
-module.exports = webpackMerge(commonConfig, {
+module.exports = webpackMerge(baseConfig, {
   devtool: 'source-map',
   output: {
     path: path.join(__dirname, '../dist/sv'),
-    filename: '[name]-[chunkhash:8].js',
-    chunkFilename: '[name]-[chunkhash:8].js',
-    sourceMapFilename: '[file].map',
+    filename: 'static/js/[name]-[chunkhash:8].js',
+    chunkFilename: 'static/js/[name]-[chunkhash:8].js',
+    sourceMapFilename: 'static/js/[file].map',
     publicPath: 'http://m.weiqunxiangce.com/sv/'
   },
   module: {
     rules: [
       {
         test: /\.css$/,
+        include: path.resolve(__dirname, '../src/res'),
         use: ExtractTextPlugin.extract(['css-loader?sourceMap', 'csso-loader?-comments'])
       },
       {
         test: /\.less$/,
+        include: path.resolve(__dirname, '../src/res'),
         use: ExtractTextPlugin.extract(['css-loader?sourceMap', 'csso-loader?-comments', 'less-loader'])
       },
       {
         test: /\.(jpe?g|png|gif)$/i,
+        include: path.resolve(__dirname, '../src'),
         use: [
           {
             loader: 'image-webpack-loader',
@@ -50,6 +53,7 @@ module.exports = webpackMerge(commonConfig, {
       },
       {
         test: /\.(woff|woff2|eot|ttf|svg)$/i,
+        include: path.resolve(__dirname, '../src'),
         use: {
           loader: 'url-loader',
           options: {

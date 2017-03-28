@@ -4,7 +4,7 @@ import {
 
 import {
   GALLERY_DELETE_PHOTO,
-} from '../components/gallery/actions'
+} from '../../components/gallery/actions'
 
 export default function news (state = {
   isLoaded: false,

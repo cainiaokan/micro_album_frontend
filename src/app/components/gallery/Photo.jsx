@@ -24,11 +24,13 @@ export default class Photo extends React.Component {
     this.touchMoved = false
     this.gestureStart = false
     this.image = new Image()
-    this.image.src = props.photoUrl
     // this.loadImageDelay = setTimeout(() => {
     //   this.image.src = props.photoUrl
     // }, 200)
-    this.image.onload = this.onLoadHandler.bind(this)
+    setTimeout(() => {
+      this.image.src = props.photoUrl
+      this.image.onload = this.onLoadHandler.bind(this)
+    }, 1)
     this.touchStartHandler = this.touchStartHandler.bind(this)
     this.touchMoveHandler = this.touchMoveHandler.bind(this)
     this.touchEndHanlder = this.touchEndHanlder.bind(this)

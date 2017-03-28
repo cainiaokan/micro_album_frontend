@@ -1,15 +1,31 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var WebpackChunkHash = require('webpack-chunk-hash')
-var InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const WebpackChunkHash = require('webpack-chunk-hash')
+const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
+
+const routeComponentRegex = /routes\/([^\/]+\/?[^\/]+).jsx$/
+
+const babelLoader = {
+  loader: 'babel-loader',
+  options: {
+    presets: ['react', ['es2015', {modules: false}]],
+    plugins: [
+      'syntax-dynamic-import',
+      'transform-async-to-generator',
+      'transform-regenerator',
+      'transform-runtime',
+      'transform-object-rest-spread',
+    ]
+  }
+}
 
 module.exports = {
   // 设置上下文路径
   context: path.resolve(__dirname, '..'),
   // 第三方模块清单
   entry: {
-    'static/js/vendor': [
+    'vendor': [
       'react',
       'react-dom',
       'react-router',
@@ -22,33 +38,49 @@ module.exports = {
       'iscroll',
     ],
     // 相册入口模块
-    'static/js/app': './src/app/app.jsx',
+    'app': './src/app/app.jsx',
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules)/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['react', ['es2015', {modules: false}]],
-            plugins: [
-              'syntax-dynamic-import',
-              'transform-async-to-generator',
-              'transform-regenerator',
-              'transform-runtime',
-              'transform-object-rest-spread',
-            ]
-          }
-        }]
+        include:  path.resolve(__dirname, '../src'),
+        exclude: routeComponentRegex,
+        use: [
+          babelLoader
+        ]
+      },
+      {
+        test: /\.css$/,
+        include: path.resolve(__dirname, '../src'),
+        exclude: path.resolve(__dirname, '../src/res'),
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.less$/,
+        include: path.resolve(__dirname, '../src'),
+        exclude: path.resolve(__dirname, '../src/res'),
+        use: ['style-loader', 'css-loader', 'less-loader']
+      },
+      {
+        test: routeComponentRegex,
+        include:  path.resolve(__dirname, '../src'),
+        use: [
+          {
+            loader: 'bundle-loader',
+            options: {
+              lazy: true
+            }
+          },
+          babelLoader
+        ]
       }
-    ]
+    ],
   },
   plugins: [
     // 第三方模块及编译产出的清单模块
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['static/js/vendor', 'manifest'],
+      names: ['vendor', 'manifest'],
       minChunks: Infinity
     }),
 
