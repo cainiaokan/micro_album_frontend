@@ -57,6 +57,7 @@
     "clean": "rm -rf dist/*",
     "build:dev": "webpack --env=dev --progress --profile --colors",
     "build:dist": "npm run clean && webpack --env=prod --progress --profile --colors",
+    "stat": "find src -name \"*.js\" -o -name \"*.jsx\" -o -name \"*.less\" -o -name \"*.css\" | xargs wc -l",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

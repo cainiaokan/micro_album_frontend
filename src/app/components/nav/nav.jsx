@@ -1,21 +1,21 @@
 import './index.less'
-import '../common/style/btn.less'
+import '../../res/style/btn.less'
 
 import React, { PropTypes } from 'react'
 
 import {
-  TO_HOME, TO_GALLERY,
+  TO_HOME, TO_ALBUMS,
   TO_UPLOAD, TO_MY_PHOTOS,
   TO_USER_CENTER,
   goToPage,
-} from '../routerConfig'
+} from '../../routerConfig'
 
 const menuIds = [
-  TO_HOME, TO_GALLERY, TO_UPLOAD, 
+  TO_HOME, TO_ALBUMS, TO_UPLOAD, 
   TO_MY_PHOTOS, TO_USER_CENTER,
 ]
 
-function Nav ({ pageId, notEmpty }) {
+function Nav ({ pageId }) {
   return <ul className='album-nav'>
     {
       menuIds.map(menu =>
@@ -28,12 +28,6 @@ function Nav ({ pageId, notEmpty }) {
         </li>
       )
     }
-    {
-      pageId === TO_HOME.id ?
-      <div className={`upload-guide ${notEmpty ? 'auto-hide' : ''}`}>
-        点击这里上传照片
-      </div> : null
-    }
   </ul>
 }
 
@@ -44,7 +38,6 @@ function onClickHander (ev) {
 
 Nav.propTypes = {
   pageId: PropTypes.string.isRequired,
-  notEmpty: PropTypes.bool,
 }
 
 export default Nav

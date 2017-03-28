@@ -1,5 +1,5 @@
-import './common/style/normalize.css'
-import './common/style/common.css'
+import './res/style/normalize.css'
+import './res/style/common.css'
 
 import React from 'react'
 import { render } from 'react-dom'
@@ -26,3 +26,4 @@ render (
   </Provider>,
   document.getElementById('album-root-container')
 )
+

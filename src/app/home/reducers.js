@@ -1,9 +1,12 @@
 import {
   REQUEST_NEWS, RECEIVE_NEWS,
-  TOGGLE_GALLERY,
 } from './actions'
 
-export function news (state = {
+import {
+  GALLERY_DELETE_PHOTO,
+} from '../components/gallery/actions'
+
+export default function news (state = {
   isLoaded: false,
   hasEmptyAlbum: false,
   isFetching: false,
@@ -30,14 +33,29 @@ export function news (state = {
       items: [...state.items, ...action.items],
       message: action.message,
     }
-  case TOGGLE_GALLERY:
-    return {
-      ...state,
-      showGallery: action.showGallery,
-      groupIndex: action.groupIndex,
-      photoIndex: action.photoIndex,
-    }
+  case GALLERY_DELETE_PHOTO:
+    return deletePhoto(state, action)
   default:
     return state
+  }
+}
+
+function deletePhoto (state, action) {
+  const { groupIndex, photoIndex } = action
+  const items = state.items
+  const mediaList = items[groupIndex].info.mediaList
+
+  if (mediaList.length > 1) {
+    mediaList.splice(photoIndex, 1)
+    return {
+      ...state,
+      items: items.slice(0)
+    }
+  } else {
+    items.splice(groupIndex, 1)
+    return {
+      ...state,
+      items: items.slice(0),
+    }
   }
 }

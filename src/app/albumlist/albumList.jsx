@@ -3,14 +3,12 @@ import '../res/style/btn.less'
 
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchNews } from './actions'
-import { showGallery } from '../components/gallery/actions'
-import { TO_HOME } from '../routerConfig'
+import { } from './actions'
+import {  } from '../components/gallery/actions'
+import { TO_ALBUMS } from '../routerConfig'
 import Nav from '../components/nav/nav'
-import Gallery from '../components/gallery/gallery'
-import GalleryOverlay from '../components/overlay/GalleryOverlay'
 
-class Home extends React.Component {
+class AlbumList extends React.Component {
 
   constructor(props) {
     super(props)
@@ -21,62 +19,11 @@ class Home extends React.Component {
   }
 
   componentDidMount () {
-    const { dispatch, pageNum } = this.props
-    dispatch(fetchNews(pageNum))
     document.addEventListener('scroll', this.onScrollHandler)
   }
 
   componentWillUnmount () {
     document.removeEventListener('scroll', this.onScrollHandler)
-  }
-
-  componentWillReceiveProps (newProps) {
-    const newPhotoId = newProps.photoId
-    // 让相册正在浏览的图片自动滚动到视图可见区域
-    if (!!newPhotoId && newPhotoId !== this.props.photoId) {
-      const photo = document.getElementById(`photo-${newPhotoId}`)
-      document.body.scrollTop =
-        photo.offsetTop -
-        document.documentElement.clientHeight / 2 +
-        photo.clientHeight / 2
-    }
-  }
-
-  onScrollHandler () {
-    const { dispatch, pageNum, isFetching, hasMore } = this.props
-    if (!isFetching &&
-        hasMore &&
-        document.body.scrollTop + document.documentElement.clientHeight + 64 >= document.documentElement.offsetHeight) {
-      dispatch(fetchNews(pageNum))
-    }
-  }
-
-  onGalleryShow (ev) {
-    const { getPhotoByIndex } = this
-    const { dispatch, items, } = this.props
-    const { groupIndex, photoIndex } = ev.currentTarget.dataset  
-    dispatch(showGallery({
-      showGallery: true,
-      groupIndex: +groupIndex,
-      photoIndex: +photoIndex,
-      totalCount: items[groupIndex].info.mediaList.length,
-      getPhotoByIndex,
-      preLoad: [1, 1],
-      minScaleDown: 1,
-      maxScaleUp: 2,
-      loop: false,
-    }))
-  }
-
-  getPhotoByIndex (groupIndex, photoIndex) {
-    const { items } = this.props
-    const photo = items[groupIndex].info.mediaList[photoIndex]
-    const { photoId, photoUrl } = photo
-    return {
-      photoId,
-      photoUrl: `${photoUrl}!w640`,
-      thumbnail: `${photoUrl}!w132h132`,
-    }
   }
 
   goToAlbum (ev) {
@@ -85,17 +32,14 @@ class Home extends React.Component {
 
   render () {
     const {
-      hasEmptyAlbum, isLoaded,
-      isFetching, message, items, hasMore,
-      showGallery,
+      isLoaded,
+      isFetching,
+      items,
+      hasMore,
     } = this.props
 
     return (
-      <div className='album-home'>
-        <div className='album-banner'>
-          <p><b>100,000+</b>个相册被创建</p>
-          <p>和家人朋友一起共享照片</p>
-        </div>
+      <div className='album-list'>
         {
           isLoaded && !items.length ?
           <div className='no-album'>
@@ -106,19 +50,6 @@ class Home extends React.Component {
             </div>
             <p>相册空间无限制</p>
             <p className='help'><a href='javascript:;'>微群相册使用指南</a></p>
-          </div> : null
-        }
-        {
-          isLoaded && !hasEmptyAlbum ?
-          <div className='create-album'>
-            不同的聚会、旅行......共享不同的照片
-            <a href='/quan/new/' className='btn btn-red btn-rounded'>创建相册</a>
-          </div> : null
-        }
-        {
-          message ?
-          <div className='message-info'>
-            <a href='/msg'>{message.description}</a>
           </div> : null
         }
         <div className={`upload-guide ${items.length ? 'auto-hide' : ''}`}>
@@ -179,21 +110,13 @@ class Home extends React.Component {
             }
           </div> : null
         }
-        <Nav pageId={TO_HOME.id} />
-        {
-          showGallery ?
-          <Gallery /> : null
-        }
-        {
-          showGallery ?
-          <GalleryOverlay/> : null
-        }
+        <Nav pageId={TO_ALBUMS.id} />
       </div>
     )
   }
 }
 
-Home.propTypes = {
+AlbumList.propTypes = {
   isLoaded: PropTypes.bool.isRequired,
   hasEmptyAlbum: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
@@ -214,4 +137,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(AlbumList)

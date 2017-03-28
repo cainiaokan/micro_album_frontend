@@ -8,11 +8,11 @@ const commonConfig = require('./base.js')
 module.exports = webpackMerge(commonConfig, {
   watch: true,
   output: {
-    path: path.join(__dirname, '../dist'),
+    path: path.join(__dirname, '../dist/sv'),
     filename: '[name].js',
     chunkFilename: '[name].js',
     sourceMapFilename: '[name].map',
-    publicPath: 'http://weixin.imliren.com'
+    publicPath: 'http://weixin.imliren.com/sv/'
   },
   module: {
     rules: [
@@ -42,7 +42,7 @@ module.exports = webpackMerge(commonConfig, {
             loader: 'url-loader',
             options: {
               limit: 10000,
-              name: '/static/img/[name].[ext]'
+              name: 'static/img/[name].[ext]'
             }
           }
         ]
@@ -53,7 +53,7 @@ module.exports = webpackMerge(commonConfig, {
           loader: 'url-loader',
           options: {
             limit: 100000,
-            name: '/static/img/[name].[ext]'
+            name: 'static/img/[name].[ext]'
           }
         }
       }

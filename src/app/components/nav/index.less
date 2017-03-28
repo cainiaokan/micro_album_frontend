@@ -24,9 +24,9 @@
     &:before {
       display: block;
 
-      width: .25rem;
-      height: .25rem;
-      margin: .04rem auto .04rem;
+      width: .2rem;
+      height: .2rem;
+      margin: .04rem auto .06rem;
 
       content: '\0020';
 
@@ -72,50 +72,6 @@
     }
     &.active:before {
       background-image: url(./img/user-red.png);
-    }
-  }
-  .upload-guide {
-    position: absolute;
-    top: -.4rem;
-    left: 50%;
-
-    padding: .08rem .3rem;
-
-    transition: visibility 0s linear 2s;
-    transform: translate(-50%, 0);
-    pointer-events: none;
-
-    color: #e4474e;
-    border: 1px solid #e4474e;
-    border-radius: .15rem;
-    background-color: #fff;
-    &:before {
-      position: absolute;
-      bottom: -.2rem;
-      left: 50%;
-
-      margin-left: -.1rem;
-
-      content: '\0020';
-
-      border: .1rem solid transparent;
-      border-top-color: #e4474e;
-    }
-    &:after {
-      position: absolute;
-      bottom: -.19rem;
-      left: 50%;
-
-      margin-top: -2px;
-      margin-left: -.1rem;
-
-      content: '\0020';
-
-      border: .1rem solid transparent;
-      border-top-color: #fff;
-    }
-    &.auto-hide {
-      visibility: hidden;
     }
   }
 }

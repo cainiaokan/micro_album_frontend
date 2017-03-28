@@ -1,0 +1,151 @@
+.gallery-overlay {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+
+  color: #fff;
+  .nav-bar {
+    line-height: 1.8;
+
+    position: fixed;
+    top: 0;
+    left: 50%;
+
+    width: 100%;
+    max-width: 540px;
+    padding: .08rem .1rem;
+
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+
+    background-color: rgba(0, 0, 0, .5);
+    .basic {
+      text-align: center;
+    }
+    .desc {
+      overflow: hidden;
+    }
+    .stat {
+      float: left;
+    }
+    .close {
+      float: right;
+
+      width: .20rem;
+      height: .20rem;
+
+      background-image: url(./img/close-white.png);
+      background-repeat: no-repeat;
+      background-position: 50%;
+      background-size: .14rem .14rem;
+    }
+  }
+  .control-bar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+
+    width: 100%;
+    max-width: 540px;
+    height: .52rem;
+
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+
+    background-color: rgba(0, 0, 0, .5);
+    li {
+      display: inline-block;
+
+      width: 20%;
+      padding-bottom: .05rem;
+
+      text-align: center;
+      vertical-align: top;
+      &:before {
+        display: block;
+
+        width: .2rem;
+        height: .2rem;
+        margin: .06rem auto .08rem;
+
+        content: '\0020';
+
+        background-size: cover;
+      }
+    }
+    .delete {
+      &:before {
+        background-image: url(./img/trash-white.png);
+      }
+    }
+    .share {
+      &:before {
+        background-image: url(./img/share-white.png);
+      }
+    }
+    .has-me {
+      &:before {
+        background-image: url(./img/eye-white.png);
+      }
+      &.active:before {
+        background-image: url(./img/eye-red.png);
+      }
+    }
+    .like {
+      &:before {
+        background-image: url(./img/like-white.png);
+      }
+      &.active:before {
+        background-image: url(./img/like-red.png);
+      }
+    }
+    .comment {
+      &:before {
+        background-image: url(./img/comment-white.png);
+      }
+    }
+    .hidden {
+      visibility: hidden;
+
+      pointer-events: none;
+    }
+    .tip {
+      line-height: .35rem;
+
+      position: absolute;
+      top: -.43rem;
+
+      width: 100%;
+      height: .35rem;
+
+      text-align: center;
+
+      color: #606060;
+      border-radius: .08rem;
+      background-color: rgba(255, 255, 255, .8);
+      &:before {
+        position: absolute;
+        bottom: 0;
+
+        display: block;
+
+        width: 0;
+        height: 0;
+        margin-left: -.08rem;
+
+        content: '\0020';
+        transform: translate(0, 99%);
+
+        border: .08rem solid transparent;
+        border-top: .08rem solid rgba(255, 255, 255, .8);
+      }
+    }
+    .arrow-2:before {
+      left: 30%;
+    }
+    .arrow-3:before {
+      left: 50%;
+    }
+  }
+}

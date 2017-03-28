@@ -12,8 +12,11 @@ module.exports = {
     'static/js/vendor': [
       'react',
       'react-dom',
+      'react-router',
       'react-redux',
       'redux',
+      'redux-thunk',
+      'redux-logger',
       'es6-promise',
       'isomorphic-fetch',
       'iscroll',

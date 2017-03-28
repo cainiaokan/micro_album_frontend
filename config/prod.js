@@ -9,11 +9,11 @@ const commonConfig = require('./base.js')
 module.exports = webpackMerge(commonConfig, {
   devtool: 'source-map',
   output: {
-    path: path.join(__dirname, '../dist'),
+    path: path.join(__dirname, '../dist/sv'),
     filename: '[name]-[chunkhash:8].js',
     chunkFilename: '[name]-[chunkhash:8].js',
     sourceMapFilename: '[file].map',
-    publicPath: 'http://m.weiqunxiangce.com'
+    publicPath: 'http://m.weiqunxiangce.com/sv/'
   },
   module: {
     rules: [
@@ -43,7 +43,7 @@ module.exports = webpackMerge(commonConfig, {
             loader: 'url-loader',
             options: {
               limit: 100000,
-              name: '/static/img/[name]-[hash:8].[ext]'
+              name: 'static/img/[name]-[hash:8].[ext]'
             }
           }
         ]
@@ -54,7 +54,7 @@ module.exports = webpackMerge(commonConfig, {
           loader: 'url-loader',
           options: {
             limit: 100000,
-            name: '/static/img/[name]-[hash:8].[ext]'
+            name: 'static/img/[name]-[hash:8].[ext]'
           }
         }
       }

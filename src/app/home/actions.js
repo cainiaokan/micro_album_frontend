@@ -2,11 +2,11 @@ import { getNews } from '../http'
 
 export const REQUEST_NEWS = 'REQUEST_NEWS'
 export const RECEIVE_NEWS = 'RECEIVE_NEWS'
-export const TOGGLE_GALLERY = 'TOGGLE_GALLERY'
+export const SHOW_GALLERY = 'SHOW_GALLERY'
 
 function requestNews () {
   return {
-    type: REQUEST_NEWS
+    type: REQUEST_NEWS,
   }
 }
 
@@ -28,13 +28,3 @@ export function fetchNews (pageNum) {
   }
 }
 
-export function toggleGallery (showGallery, groupIndex, photoIndex) {
-  return dispatch => {
-    dispatch({
-      type: TOGGLE_GALLERY,
-      showGallery,
-      groupIndex,
-      photoIndex,
-    })
-  }
-}

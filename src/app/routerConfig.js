@@ -6,7 +6,7 @@ export const TO_HOME = {
   name: '首页',
   path: '/',
 }
-export const TO_GALLERY = {
+export const TO_ALBUMS = {
   id: 'to-gallery',
   name: '相册',
   path: '/gallery',
@@ -34,8 +34,8 @@ export function goToPage(pageId) {
   case TO_HOME.id:
     path = TO_HOME.path
     break
-  case TO_GALLERY.id:
-    path = TO_GALLERY.path
+  case TO_ALBUMS.id:
+    path = TO_ALBUMS.path
     // location.href = '/photos/'
     break
   case TO_UPLOAD.id:
