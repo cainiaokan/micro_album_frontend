@@ -9,7 +9,7 @@ export const TO_HOME = {
 export const TO_ALBUMS = {
   id: 'to-gallery',
   name: '相册',
-  path: '/gallery',
+  path: '/sv/gallery',
 }
 export const TO_UPLOAD = {
   id: 'to-upload',
@@ -24,7 +24,7 @@ export const TO_MY_PHOTOS = {
 export const TO_USER_CENTER = {
   id: 'to-user-center',
   name: '个人中心',
-  path: 'sv/user_center',
+  path: '/sv/user_center',
 }
 
 export function goToPage(pageId) {

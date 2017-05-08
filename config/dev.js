@@ -8,11 +8,11 @@ const baseConfig = require('./base')
 module.exports = webpackMerge(baseConfig, {
   watch: true,
   output: {
-    path: path.join(__dirname, '../dist/sv'),
+    path: path.join(__dirname, '../dist'),
     filename: 'static/js/[name].js',
     chunkFilename: 'static/js/[name].js',
     sourceMapFilename: 'static/js/[name].map',
-    publicPath: 'http://weixin.imliren.com/sv/'
+    publicPath: 'http://weixin.imliren.com/'
   },
   module: {
     rules: [

@@ -9,11 +9,11 @@ const baseConfig = require('./base')
 module.exports = webpackMerge(baseConfig, {
   devtool: 'source-map',
   output: {
-    path: path.join(__dirname, '../dist/sv'),
+    path: path.join(__dirname, '../dist'),
     filename: 'static/js/[name]-[chunkhash:8].js',
     chunkFilename: 'static/js/[name]-[chunkhash:8].js',
     sourceMapFilename: 'static/js/[file].map',
-    publicPath: 'http://m.weiqunxiangce.com/sv/'
+    publicPath: 'http://m.weiqunxiangce.com/'
   },
   module: {
     rules: [
